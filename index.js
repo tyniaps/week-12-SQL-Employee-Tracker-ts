@@ -2,7 +2,7 @@ const inquirer = require ('inquirer');
 const mySql2 = require ('mysql2/promise');
 
 function mainMenu() {
-    
+
     console.log("Welcome to the SQL Employee Tracker");
     console.log("What would you like to do?");
 
@@ -20,10 +20,36 @@ function mainMenu() {
             "Add New Employee",
             "Exit",
         ], 
-        
-        default: "View Departments",
     }]
     )
+
+        .then(({ mainMenuOptions }) => {
+            switch (mainMenuOptions) {
+
+                case "View Departments":
+                break;
+
+                case "Add New Department":
+                break; 
+
+                case "View Job Roles":
+                break;
+
+                case "Add New Job Role":
+                break; 
+
+                case "View Employees":
+                break; 
+
+                case "Add New Employee":
+                break;
+
+                case "Exit":
+                break;
+
+
+            }
+        })
 
     
 
