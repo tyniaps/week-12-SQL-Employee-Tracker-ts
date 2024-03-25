@@ -1,6 +1,14 @@
 const inquirer = require ('inquirer'); 
 const mySql2 = require ('mysql2/promise');
 
+const connect2Database = {
+    host: "localhost",
+    user: "root",
+    password: "mypass1",
+    database: "etracker",
+};
+
+
 function mainMenu() {
 
     console.log("Welcome to the SQL Employee Tracker");
