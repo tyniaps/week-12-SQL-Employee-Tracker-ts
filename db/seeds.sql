@@ -20,7 +20,8 @@ INSERT INTO department (department_name) VALUES
 
  
 
- INSERT INTO employee (first_name, last_name, role_id, manager_id), 
+ INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES
+ 
  ('Jaya', 'Ayna', 1, 1),
  ('Lina', 'Moon', 2, NULL),
  ('Misty', 'Ellis', 3, 2),
