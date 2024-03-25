@@ -8,6 +8,10 @@ const connect2Database = {
     database: "etracker",
 };
 
+function viewDepartments () {
+    
+}
+
 
 function mainMenu() {
 
