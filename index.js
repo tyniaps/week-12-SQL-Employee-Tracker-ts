@@ -171,8 +171,8 @@ function mainMenu() {
     }]
     )
 
-        .then(({ mainMenuOptions }) => {
-            switch (mainMenuOptions) {
+        .then(({ menuOptions }) => {
+            switch (menuOptions) {
 
                 case "View Departments":
                       viewDepartments();
