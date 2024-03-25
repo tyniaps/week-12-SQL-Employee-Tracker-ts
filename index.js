@@ -53,13 +53,13 @@ async function newDepartment() {
         const departmentInput = await inquirer.prompt([
             {  
                 type: 'input',
-                name: 'department name',
-                message: 'Enter the name of the department'
+                name: 'department_name',
+                message: 'Enter the name of the department:'
             },
         ]);
 
 
-        const [rows, fields] = await Connection.execute(
+        const [rows, fields] = await connect.execute(
             'INSERT INTO department (department_name) VALUES (?)',
             [departmentInput.name]
         );
@@ -69,11 +69,42 @@ async function newDepartment() {
             console.error("Unable to add department, please try again");
         } finally {
             connect.end();
-    }
-
-    
+    }    
 }
 
+async function newEmployeeRole() {
+    const connect = await mySql2.createConnection(connectToDb);
+    try { 
+        const roleInput = await inquirer.prompt([
+            {
+                type: 'input',
+                name: 'employee_role',
+                message: 'Enter the title of the role:',
+            },
+            {
+                type: 'input',
+                name: 'salary',
+                message: 'Enter the salary of the role:',
+            },
+            {
+                type: 'input',
+                name: 'department_id',
+                message: 'Enter the ID of the roles department:'
+            }
+        ]);
+
+        const [rows, fields] = await connect.execute(
+            'INSERT INTO employee_role (title, salary, department_id) VALUES (?, ?, ?)',
+            [roleInput.title, roleInput.salary, roleInput.department_id]
+        );
+        
+           console.log(`"${roleInput.title}" successfully added`);
+        } catch (error) {
+           console.error("Unable to add job role, please try again");
+        } finally {
+            connect.end();
+    }    
+}
 
 
 function mainMenu() {
