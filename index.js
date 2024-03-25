@@ -1,16 +1,51 @@
 const inquirer = require ('inquirer'); 
 const mySql2 = require ('mysql2/promise');
 
-const connect2Database = {
+const connectToDb = {
     host: "localhost",
     user: "root",
     password: "mypass1",
     database: "etracker",
 };
 
-function viewDepartments () {
-    
+async function viewDepartments () {
+    const connect = await mySql2.createConnection(connectToDb);
+    try {
+        const [rows, fields] = await connect.execute('SELECT * FROM department');
+        console.table(rows);
+    } catch (error) {
+        console.error('error with showing departments', error);
+    } finally {
+        connect.end();
+    }
 }
+
+async function viewRoles () {
+    const connect = await mySql2.createConnection(connectToDb);
+    try {
+        const[rows, fields] = await connect.execute('SELECT * FROM employee_role');
+        console.table(rows);
+    } catch (error) {
+        console.error('error with viewing roles', error);
+    } finally {
+        connect.end();
+
+    }
+}
+
+async function viewEmployees () {
+    const connect = await mySql2.createConnection(connectToDb);
+    try {
+        const[rows, fields] = await connect.execute('SELECT * FROM employee');
+        console.table(rows);
+    } catch (error) {
+        console.error('error with viewing employees', error);
+    } finally {
+        connect.end();
+    
+    }
+}
+
 
 
 function mainMenu() {
