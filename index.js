@@ -72,7 +72,7 @@ async function newDepartment() {
     }    
 }
 
-async function newEmployeeRole() {
+async function newJobRole() {
     const connect = await mySql2.createConnection(connectToDb);
     try { 
         const roleInput = await inquirer.prompt([
@@ -105,6 +105,48 @@ async function newEmployeeRole() {
             connect.end();
     }    
 }
+
+    
+
+async function newEmployee() {
+        const connect = await mySql2.createConnection(connectToDb);
+    try { 
+        const employeeInput = await inquirer.prompt([
+            {
+                type: 'input',
+                name: 'first_name',
+                message: 'Enter the first name of the employee ',
+            },
+            {
+                type: 'input',
+                name: 'last_name',
+                message: 'Enter the last name of the employee',
+            },
+            {
+                type: 'input',
+                name: 'role_id',
+                message: 'Enter the ID for the employee job role title'
+            },
+            {
+                type: 'input',
+                name: 'manager_id',
+                message: 'Enter the ID for the employee manager (if n/a, please leave this blank)',
+            }
+        ]);
+
+        const [rows, fields] = await connect.execute(
+            'INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)',
+            [employeeInput.first_name, employeeInput.last_name, employeeInput.role_id, employeeInput.manager_id]
+        );
+        
+           console.log(`"${employeeInput.first_name} ${employeeInput.last_name}" successfully added`);
+        } catch (error) {
+           console.error("Unable to add employee, please try again");
+        } finally {
+            connect.end();
+    }    
+}
+
 
 
 function mainMenu() {
