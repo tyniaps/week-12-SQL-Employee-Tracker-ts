@@ -5,30 +5,38 @@ const connectToDb = {
     host: "localhost",
     user: "root",
     password: "mypass1",
-    database: "etracker",
+    database: "etracker_db",
 };
 
 async function viewDepartments () {
     const connect = await mySql2.createConnection(connectToDb);
     try {
-        const [rows, fields] = await connect.execute('SELECT * FROM department');
+        const [rows, fields] = await connect.execute('SELECT * FROM departments');
         console.table(rows);
     } catch (error) {
         console.error('error with showing departments', error);
     } finally {
-        connect.end();
+        connect.end()
+        .then (() => {
+            mainMenu();
+        })
+    
     }
 }
 
 async function viewRoles () {
     const connect = await mySql2.createConnection(connectToDb);
     try {
-        const[rows, fields] = await connect.execute('SELECT * FROM employee_role');
+        const[rows, fields] = await connect.execute('SELECT * FROM job_roles');
         console.table(rows);
     } catch (error) {
         console.error('error with viewing roles', error);
     } finally {
-        connect.end();
+        connect.end()
+        .then (() => {
+            mainMenu();
+        })
+    
 
     }
 }
@@ -36,12 +44,15 @@ async function viewRoles () {
 async function viewEmployees () {
     const connect = await mySql2.createConnection(connectToDb);
     try {
-        const[rows, fields] = await connect.execute('SELECT * FROM employee');
+        const[rows, fields] = await connect.execute('SELECT * FROM employees');
         console.table(rows);
     } catch (error) {
         console.error('error with viewing employees', error);
     } finally {
-        connect.end();
+        connect.end()
+        .then (() => {
+            mainMenu();
+        })
     
     }
 }
@@ -60,15 +71,19 @@ async function newDepartment() {
 
 
         const [rows, fields] = await connect.execute(
-            'INSERT INTO department (department_name) VALUES (?)',
-            [departmentInput.name]
+            'INSERT INTO departments (department_name) VALUES (?)',
+            [departmentInput.department_name]
         );
 
-        console.log(`"${departmentInput.name}" successfully added`);
+        console.log(`"${departmentInput.department_name}" successfully added`);
         } catch (error) {
             console.error("Unable to add department, please try again");
         } finally {
-            connect.end();
+            connect.end()
+            .then (() => {
+                mainMenu();
+            })
+        
     }    
 }
 
@@ -94,7 +109,7 @@ async function newJobRole() {
         ]);
 
         const [rows, fields] = await connect.execute(
-            'INSERT INTO job_role (title, salary, department_id) VALUES (?, ?, ?)',
+            'INSERT INTO job_roles (title, salary, department_id) VALUES (?, ?, ?)',
             [roleInput.title, roleInput.salary, roleInput.department_id]
         );
         
@@ -102,7 +117,11 @@ async function newJobRole() {
         } catch (error) {
            console.error("Unable to add job role, please try again");
         } finally {
-            connect.end();
+            connect.end()
+            .then (() => {
+                mainMenu();
+            })
+        
     }    
 }
 
@@ -135,7 +154,7 @@ async function newEmployee() {
         ]);
 
         const [rows, fields] = await connect.execute(
-            'INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)',
+            'INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)',
             [employeeInput.first_name, employeeInput.last_name, employeeInput.role_id, employeeInput.manager_id]
         );
         
@@ -143,21 +162,22 @@ async function newEmployee() {
         } catch (error) {
            console.error("Unable to add employee, please try again");
         } finally {
-            connect.end();
+            connect.end()
+            .then (() => {
+                mainMenu();
+            })
+        
     }    
 }
 
+console.log("Welcome to the SQL Employee Tracker");
+console.log("What would you like to do?");
 
+async function mainMenu() {
+    const menuOptions = await inquirer.prompt({
 
-function mainMenu() {
-
-    console.log("Welcome to the SQL Employee Tracker");
-    console.log("What would you like to do?");
-
-        inquirer.prompt(
-    [{
         type: "list",
-        name: "menuOptions",
+        name: "input",
         message: "Please choose from the options below:",
         choices: [
             "View Departments",
@@ -168,11 +188,10 @@ function mainMenu() {
             "Add New Employee",
             "Exit",
         ], 
-    },
-    ])
+    });
 
-        .then(({ menuOptions }) => {
-            switch (menuOptions) {
+        
+            switch (menuOptions.input) {
 
                 case "View Departments":
                       viewDepartments();
@@ -200,17 +219,17 @@ function mainMenu() {
 
                 case "Exit":
                     exitApplication();
-                break;
+        
 
 
-            }
-        })
-
+            } 
 }
 
-mainMenu();
 
 function exitApplication() {
     console.clear();
     console.log("SQL Employee Tracker is shutting down. Enter 'Ctrl + C' to finish.");
 }
+
+
+mainMenu();

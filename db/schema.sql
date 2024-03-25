@@ -3,34 +3,32 @@ CREATE DATABASE etracker_db;
 
 USE etracker_db;
 
-DROP TABLE IF EXISTS department;
-DROP TABLE IF EXISTS job_role;
-DROP TABLE IF EXISTS employee;
+-- DROP TABLE IF EXISTS departments;
+-- DROP TABLE IF EXISTS job_roles;
+-- DROP TABLE IF EXISTS employees;
 
-CREATE TABLE department (
+CREATE TABLE departments (
     id INTEGER AUTO_INCREMENT,
     department_name VARCHAR (30) NOT NULL,
     PRIMARY KEY (id)
 );
 
-CREATE TABLE job_role (
+CREATE TABLE job_roles (
     id INTEGER AUTO_INCREMENT,
     title VARCHAR (30) NOT NULL, 
-    salary DECIMAL (10, 2)
+    salary DECIMAL (10, 2),
     department_id INTEGER,
-    PRIMARY KEY (id),
-    FOREIGN KEY (department_id) REFERENCES department(id),
-    ON DELETE SET NULL
+    PRIMARY KEY (id)
+    FOREIGN KEY (department_id) REFERENCES department(id) ON DELETE SET NULL
 );
 
-CREATE TABLE employee (
+CREATE TABLE employees (
     id INTEGER AUTO_INCREMENT,
     first_name VARCHAR (30) NOT NULL,
     last_name VARCHAR (30) NOT NULL,
     role_id INTEGER,
     department_id INTEGER,
     manager_id INTEGER,
-    PRIMARY KEY (id),
-    FOREIGN KEY (role_id) REFERENCES role(id),
-    ON DELETE SET NULL
+    PRIMARY KEY (id)
+    FOREIGN KEY (role_id) REFERENCES job_roles(id) ON DELETE SET NULL
 );
