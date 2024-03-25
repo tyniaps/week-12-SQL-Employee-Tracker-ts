@@ -47,6 +47,34 @@ async function viewEmployees () {
 }
 
 
+async function newDepartment() {
+    const connect = await mySql2.createConnection(connectToDb);
+    try { 
+        const departmentInput = await inquirer.prompt([
+            {  
+                type: 'input',
+                name: 'department name',
+                message: 'Enter the name of the department'
+            },
+        ]);
+
+
+        const [rows, fields] = await Connection.execute(
+            'INSERT INTO department (department_name) VALUES (?)',
+            [departmentInput.name]
+        );
+
+        console.log(`"${departmentInput.name}" successfully added`);
+        } catch (error) {
+            console.error("Unable to add department, please try again");
+        } finally {
+            connect.end();
+    }
+
+    
+}
+
+
 
 function mainMenu() {
 
