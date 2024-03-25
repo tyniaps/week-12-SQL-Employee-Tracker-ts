@@ -9,14 +9,14 @@ INSERT INTO department (department_name) VALUES
 
  INSERT INTO employee_role (title, salary, department_id) VALUES
 
- ('Junior Graphic Designer', '26000', 1),
- ('Senior Graphic Designer', '54000', 1),
- ('Junior Engineer', '33000', 3),
- ('Senior Engineer', '64000', 3),
- ('Financial Consultant', '40000', 4),
- ('Senior Financial Consultant', '60000', 4),
- ('HR Assistant', '32000', 5)
- ('Senior HR Assistant', '35000', 5);
+ ('Junior Graphic Designer', '26000.00', 1),
+ ('Senior Graphic Designer', '54000.00', 1),
+ ('Junior Engineer', '33000.00', 3),
+ ('Senior Engineer', '64000.00', 3),
+ ('Financial Consultant', '40000.00', 4),
+ ('Senior Financial Consultant', '60000.00', 4),
+ ('HR Assistant', '32000.00', 5)
+ ('Senior HR Assistant', '35000.00', 5);
 
  
 
