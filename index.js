@@ -168,8 +168,8 @@ function mainMenu() {
             "Add New Employee",
             "Exit",
         ], 
-    }]
-    )
+    },
+    ])
 
         .then(({ menuOptions }) => {
             switch (menuOptions) {
@@ -198,7 +198,8 @@ function mainMenu() {
                     newEmployee();
                 break;
 
-                default:
+                case "Exit":
+                    exitApplication();
                 break;
 
 
@@ -208,3 +209,8 @@ function mainMenu() {
 }
 
 mainMenu();
+
+function exitApplication() {
+    console.clear();
+    console.log("SQL Employee Tracker is shutting down. Enter 'Ctrl + C' to finish.");
+}
