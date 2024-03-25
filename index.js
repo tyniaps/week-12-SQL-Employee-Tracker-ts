@@ -78,7 +78,7 @@ async function newJobRole() {
         const roleInput = await inquirer.prompt([
             {
                 type: 'input',
-                name: 'employee_role',
+                name: 'title',
                 message: 'Enter the title of the role:',
             },
             {
@@ -94,7 +94,7 @@ async function newJobRole() {
         ]);
 
         const [rows, fields] = await connect.execute(
-            'INSERT INTO employee_role (title, salary, department_id) VALUES (?, ?, ?)',
+            'INSERT INTO job_role (title, salary, department_id) VALUES (?, ?, ?)',
             [roleInput.title, roleInput.salary, roleInput.department_id]
         );
         
@@ -175,30 +175,36 @@ function mainMenu() {
             switch (mainMenuOptions) {
 
                 case "View Departments":
+                      viewDepartments();
                 break;
 
                 case "Add New Department":
+                    newDepartment();
                 break; 
 
                 case "View Job Roles":
+                    viewRoles();
                 break;
 
                 case "Add New Job Role":
+                    newJobRole();
                 break; 
 
                 case "View Employees":
+                    viewEmployees();
                 break; 
 
                 case "Add New Employee":
+                    newEmployee();
                 break;
 
-                case "Exit":
+                default:
                 break;
 
 
             }
         })
 
-    
-
 }
+
+mainMenu();
