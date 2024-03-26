@@ -3,9 +3,6 @@ CREATE DATABASE etracker_db;
 
 USE etracker_db;
 
--- DROP TABLE IF EXISTS departments;
--- DROP TABLE IF EXISTS job_roles;
--- DROP TABLE IF EXISTS employees;
 
 CREATE TABLE departments (
     id INTEGER AUTO_INCREMENT,
@@ -19,7 +16,6 @@ CREATE TABLE job_roles (
     salary DECIMAL (10, 2),
     department_id INTEGER,
     PRIMARY KEY (id)
-    FOREIGN KEY (department_id) REFERENCES department(id) ON DELETE SET NULL
 );
 
 CREATE TABLE employees (
@@ -30,5 +26,4 @@ CREATE TABLE employees (
     department_id INTEGER,
     manager_id INTEGER,
     PRIMARY KEY (id)
-    FOREIGN KEY (role_id) REFERENCES job_roles(id) ON DELETE SET NULL
 );

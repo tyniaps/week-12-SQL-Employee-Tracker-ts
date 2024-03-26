@@ -1,5 +1,8 @@
+// import and require inquirer and mysql2 packages
 const inquirer = require ('inquirer'); 
 const mySql2 = require ('mysql2/promise');
+
+// variable for connecting to mysql database
 
 const connectToDb = {
     host: "localhost",
@@ -8,6 +11,13 @@ const connectToDb = {
     database: "etracker_db",
 };
 
+
+// FUNCTIONS
+// table structure determined by schema.sql file.
+// data to be populated from the specified table in seeds.sql file.
+
+
+// function to enable users to view departments. 
 async function viewDepartments () {
     const connect = await mySql2.createConnection(connectToDb);
     try {
@@ -23,6 +33,8 @@ async function viewDepartments () {
     
     }
 }
+
+// function to enable users to view job roles. 
 
 async function viewRoles () {
     const connect = await mySql2.createConnection(connectToDb);
@@ -41,6 +53,8 @@ async function viewRoles () {
     }
 }
 
+// function to enable users to view employees. 
+
 async function viewEmployees () {
     const connect = await mySql2.createConnection(connectToDb);
     try {
@@ -57,6 +71,7 @@ async function viewEmployees () {
     }
 }
 
+// function to enable users to add a new department to the database.
 
 async function newDepartment() {
     const connect = await mySql2.createConnection(connectToDb);
@@ -86,6 +101,8 @@ async function newDepartment() {
         
     }    
 }
+
+// function to enable users to add a new job role to the database.
 
 async function newJobRole() {
     const connect = await mySql2.createConnection(connectToDb);
@@ -118,6 +135,7 @@ async function newJobRole() {
            console.error("Unable to add job role, please try again");
         } finally {
             connect.end()
+            // The below code will allow the user to return to the main menu. 
             .then (() => {
                 mainMenu();
             })
@@ -126,6 +144,7 @@ async function newJobRole() {
 }
 
     
+// function to enable users to add a new employee to the database.
 
 async function newEmployee() {
         const connect = await mySql2.createConnection(connectToDb);
@@ -170,8 +189,12 @@ async function newEmployee() {
     }    
 }
 
+// CODE FOR NODE.JS COMMAND-LINE APPLICATION
+
 console.log("Welcome to the SQL Employee Tracker");
 console.log("What would you like to do?");
+
+// the mainMenu function will guide the user through the application via a set of prompts that they must chose from before viewing any data.
 
 async function mainMenu() {
     const menuOptions = await inquirer.prompt({
@@ -223,13 +246,14 @@ async function mainMenu() {
 
 
             } 
-}
+};
 
+// function to enable user to exit the application.
 
 function exitApplication() {
     console.clear();
     console.log("SQL Employee Tracker is shutting down. Enter 'Ctrl + C' to finish.");
-}
+};
 
 
 mainMenu();
