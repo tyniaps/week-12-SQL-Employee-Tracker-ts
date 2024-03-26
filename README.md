@@ -22,6 +22,16 @@ SO THAT I can organize and plan my business.
 
 ## Installation
 
+1. To install the application, start by cloning this repository to your local PC.
+
+2. Open the cloned repository within the command line.
+
+3. Type "npm install" to download all the required dependancies.
+
+3. Type "node index.js" to start running the application.
+
+4. You will then be presented with the main menu of application which you can use to navigate the app.
+
 ## Technologies Used
 
 ![Node.js Badge](https://img.shields.io/badge/Node.js-393?logo=nodedotjs&logoColor=fff&style=for-the-badge)
@@ -31,6 +41,10 @@ SO THAT I can organize and plan my business.
 
 ## Screenshot
 
+![Screenshot of Employee Tracker Challenge](<Screenshot 2024-03-26 032402.png>)
+
 ## Video Demo
+
+https://drive.google.com/file/d/1sW9E1YDptqXi6kYdtktLOj4i8Li2Lsx0/view?usp=sharing
 
 
